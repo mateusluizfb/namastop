@@ -8,12 +8,16 @@ class Home extends React.Component {
       <div>
         <Imports/>
         <nav>
-          <div class="nav-wrapper">
-            <a href="#" class="brand-logo center">Namastop</a>
+          <div className="nav-wrapper">
+            <a href="#" className="brand-logo center">Namastop</a>
           </div>
         </nav>
 
-        <CardsTable gratitudeMessages={this.gratitudeMessages} />
+        <div className="container" style={{'margin-top': '0.6em'}}>
+          <div className="row">
+            <CardsTable gratitudeMessages={this.props.gratitudeMessages} />
+          </div>
+        </div>
       </div>
     );
   }

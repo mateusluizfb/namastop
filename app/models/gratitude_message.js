@@ -19,7 +19,6 @@ GratitudeMessageSchema.statics.buildGratitudeMessage = async (data) => {
 
   const [sender, receiver] = await Promise.all([asyncSender, asyncReceiver])
 
-  console.log(sender['user']['profile']['image_512']);
   return {
     sender: sender['user']['real_name'],
     senderPhoto: sender['user']['profile']['image_512'],

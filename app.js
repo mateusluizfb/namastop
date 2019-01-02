@@ -10,9 +10,6 @@ const gratitudeMessageController = require('./app/controllers/gratitude_message_
 
 const app = express();
 
-app.use('/', homeController);
-app.use('/gratitude-message', gratitudeMessageController);
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -22,6 +19,8 @@ app.set('views', path.resolve('./app/views'));
 app.set('view engine', 'js');
 app.engine('js', createEngine());
 
+app.use('/', homeController);
+app.use('/gratitude-message', gratitudeMessageController);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

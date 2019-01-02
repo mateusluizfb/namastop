@@ -35,13 +35,15 @@ describe('GratitudeMessageController', () => {
     const createFn = jest.fn();
 
     beforeAll(() => {
-      GratitudeMessage.buildGratitudeMessage = () => ({
-        sender: 'João',
-        sender_photo: 'www.photos.com/João.png',
-        receiver: 'Mateus',
-        receiver_photo: 'www.photos.com/Mateus.png',
-        message: 'um agradecimento para Mateus'
-      });
+      GratitudeMessage.buildGratitudeMessage = () => {
+        return Promise.resolve({
+          sender: 'João',
+          sender_photo: 'www.photos.com/João.png',
+          receiver: 'Mateus',
+          receiver_photo: 'www.photos.com/Mateus.png',
+          message: 'um agradecimento para Mateus'
+        });
+      }
 
       GratitudeMessage.create = createFn
     });

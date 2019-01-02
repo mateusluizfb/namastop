@@ -10,12 +10,14 @@ const GratitudeMessageSchema = new Schema({
   message: String
 });
 
-GratitudeMessageSchema.statics.buildGratitudeMessage = (data) => {
+GratitudeMessageSchema.statics.buildGratitudeMessage = async (data) => {
   const receiverUserId = data["text"].match(/(?<=<@).*?(?=\|)/g)[0]
   const senderUserId = data["user_id"]
 
-  const sender = Slack.getUser(senderUserId)
-  const receiver = Slack.getUser(receiverUserId)
+  const asyncSender = Slack.getUser(senderUserId)
+  const asyncReceiver = Slack.getUser(receiverUserId)
+
+  const [sender, receiver] = await Promise.all([asyncSender, asyncReceiver])
 
   return {
     sender: sender['user']['real_name'],

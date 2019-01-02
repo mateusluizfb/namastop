@@ -32,24 +32,32 @@ describe('GratitudeMessageController', () => {
   }
 
   describe('POST receive-user-message', () => {
+    const createFn = jest.fn();
+
+    beforeAll(() => {
+      GratitudeMessage.buildGratitudeMessage = () => ({
+        sender: 'João',
+        sender_photo: 'www.photos.com/João.png',
+        receiver: 'Mateus',
+        receiver_photo: 'www.photos.com/Mateus.png',
+        message: 'um agradecimento para Mateus'
+      });
+
+      GratitudeMessage.create = createFn
+    });
+
     it('will respond 200 OK' , () => {
       return request(app)
         .post('/gratitude-message/receive-slack-message')
         .type("json")
         .send(requestFormData)
-        .then((response) => {
-          expect(response.statusCode).toBe(200)
-        });
+        .then((response) => expect(response.statusCode).toBe(200));
     });
 
-    xit('will create a gratitude message', () => {
+    it('will create a gratitude message', () => {
       return request(app)
         .post('/gratitude-message/receive-slack-message', requestFormData)
-        .then((response) => {
-          GratitudeMessage.find({ sender: 'João' }, (err, gratitudeMessage) => {
-          expect(gratitudeMessage).toEqual(null);
-        });
-      });
-    })
+        .then((response) => expect(createFn).toHaveBeenCalled());
+    });
   });
 })

@@ -62,13 +62,16 @@ describe('GratitudeMessage', () => {
     it('will return the GratitudeMessage data', () => {
       let gratitudeMessageData = GratitudeMessage.buildGratitudeMessage(data)
 
-      expect(gratitudeMessageData).toEqual({
-        sender: 'João',
-        sender_photo: 'www.photos.com/João.png',
-        receiver: 'Mateus',
-        receiver_photo: 'www.photos.com/Mateus.png',
-        message: 'um agradecimento para Mateus'
-      })
+      return gratitudeMessageData
+        .then((data) => {
+          expect(data).toEqual({
+            sender: 'João',
+            sender_photo: 'www.photos.com/João.png',
+            receiver: 'Mateus',
+            receiver_photo: 'www.photos.com/Mateus.png',
+            message: 'um agradecimento para Mateus'
+          })
+        })
     });
   })
 });

@@ -16,8 +16,10 @@ class Slack {
   listUsers() {
     return SlackApi.users.list({token: this.token, scope: 'bot'})
   }
-}
 
-const slack_bot = new Slack()
+  getUser(userSlackId) {
+    return SlackApi.users.info({token: this.token, user: userSlackId})
+  }
+}
 
 module.exports = Slack;

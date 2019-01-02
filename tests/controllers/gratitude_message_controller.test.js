@@ -38,9 +38,9 @@ describe('GratitudeMessageController', () => {
       GratitudeMessage.buildGratitudeMessage = () => {
         return Promise.resolve({
           sender: 'João',
-          sender_photo: 'www.photos.com/João.png',
+          senderPhoto: 'www.photos.com/João.png',
           receiver: 'Mateus',
-          receiver_photo: 'www.photos.com/Mateus.png',
+          receiverPhoto: 'www.photos.com/Mateus.png',
           message: 'um agradecimento para Mateus'
         });
       }
@@ -58,7 +58,8 @@ describe('GratitudeMessageController', () => {
 
     it('will create a gratitude message', () => {
       return request(app)
-        .post('/gratitude-message/receive-slack-message', requestFormData)
+        .post('/gratitude-message/receive-slack-message')
+        .send(requestFormData)
         .then((response) => expect(createFn).toHaveBeenCalled());
     });
   });

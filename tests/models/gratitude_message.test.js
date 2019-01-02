@@ -39,7 +39,7 @@ describe('GratitudeMessage', () => {
         user: {
           real_name: 'João',
           profile: {
-            image_72: 'www.photos.com/João.png'
+            image_512: 'www.photos.com/João.png'
           }
         }
       }
@@ -48,7 +48,7 @@ describe('GratitudeMessage', () => {
         user: {
           real_name: 'Mateus',
           profile: {
-            image_72: 'www.photos.com/Mateus.png'
+            image_512: 'www.photos.com/Mateus.png'
           }
         }
       }
@@ -66,9 +66,9 @@ describe('GratitudeMessage', () => {
         .then((data) => {
           expect(data).toEqual({
             sender: 'João',
-            sender_photo: 'www.photos.com/João.png',
+            senderPhoto: 'www.photos.com/João.png',
             receiver: 'Mateus',
-            receiver_photo: 'www.photos.com/Mateus.png',
+            receiverPhoto: 'www.photos.com/Mateus.png',
             message: 'um agradecimento para Mateus'
           })
         })

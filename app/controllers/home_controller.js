@@ -1,10 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const GratitudeMessage = require('../models/gratitude_message');
 
 router.get('/', function(req, res, next) {
-  
-
-  res.render('home', { title: 'Express' });
+  GratitudeMessage.find({}, (err, gratitudeMessages) => {
+    res.render('home', { gratitudeMessages });
+  })
 });
 
 module.exports = router;

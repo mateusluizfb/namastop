@@ -13,7 +13,7 @@ class Home extends React.Component {
           </div>
         </nav>
 
-        <div className="container" style={{'margin-top': '0.6em'}}>
+        <div className="container" style={{'marginTop': '1.0em'}}>
           <div className="row">
             <CardsTable gratitudeMessages={this.props.gratitudeMessages} />
           </div>

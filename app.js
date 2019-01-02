@@ -5,11 +5,13 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const { createEngine } = require('express-react-views');
 
-const indexRouter = require('./app/controllers/home_controller');
+const homeController = require('./app/controllers/home_controller');
+const slackController = require('./app/controllers/slack_controller');
 
 const app = express();
 
-app.use('/', indexRouter);
+app.use('/', homeController);
+app.use('/slack', slackController);
 
 app.use(logger('dev'));
 app.use(express.json());

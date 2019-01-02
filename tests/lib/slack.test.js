@@ -3,8 +3,6 @@ const SlackApi = require('slack');
 process.env.SLACK_BOT_TOKEN = 'xxxx-xxxx';
 
 describe('Slack', () => {
-  const classInstance = new Slack;
-
   describe('sendMessage', () => {
     it('will return true', () => {
       const mockedFunction = jest.fn();
@@ -13,7 +11,7 @@ describe('Slack', () => {
       const userSlackId = 'U123456w';
       const message = 'Mensagem teste';
 
-      classInstance.sendMessage(userSlackId, message)
+      Slack.sendMessage(userSlackId, message)
       expect(mockedFunction).toHaveBeenCalledWith({
         token: 'xxxx-xxxx',
         channel: userSlackId,
@@ -51,7 +49,7 @@ describe('Slack', () => {
 
     it('will return the users list', () => {
       SlackApi.users.list = jest.fn(() => Promise.resolve(response))
-      expect(classInstance.listUsers()).resolves.toEqual(response);
+      expect(Slack.listUsers()).resolves.toEqual(response);
     })
   });
 
@@ -103,7 +101,7 @@ describe('Slack', () => {
 
     it('will return the user data', () => {
      SlackApi.users.list = jest.fn(() => Promise.resolve(response))
-     expect(classInstance.listUsers()).resolves.toEqual(response);
+     expect(Slack.listUsers()).resolves.toEqual(response);
     });
   })
 })

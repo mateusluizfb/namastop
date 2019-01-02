@@ -5,11 +5,11 @@
   "scripts": {
     "start": "node ./bin/www",
     "test": "jest"
-}
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
+    "dotenv": "^6.2.0",
     "express": "~4.16.0",
     "express-react-views": "^0.11.0",
     "http-errors": "~1.6.2",
@@ -17,7 +17,8 @@
     "morgan": "~1.9.0",
     "nodemon": "^1.18.9",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react-dom": "^16.7.0",
+    "slack": "^11.0.1"
   },
   "devDependencies": {
     "jest": "^23.6.0"

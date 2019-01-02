@@ -42,7 +42,7 @@ describe('GratitudeMessageController', () => {
         });
     });
 
-    it('will create a gratitude message', () => {
+    xit('will create a gratitude message', () => {
       return request(app)
         .post('/gratitude-message/receive-slack-message', requestFormData)
         .then((response) => {

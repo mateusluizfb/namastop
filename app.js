@@ -6,12 +6,12 @@ const logger = require('morgan');
 const { createEngine } = require('express-react-views');
 
 const homeController = require('./app/controllers/home_controller');
-const slackController = require('./app/controllers/slack_controller');
+const gratitudeMessageController = require('./app/controllers/gratitude_message_controller');
 
 const app = express();
 
 app.use('/', homeController);
-app.use('/slack', slackController);
+app.use('/gratitude-message', gratitudeMessageController);
 
 app.use(logger('dev'));
 app.use(express.json());

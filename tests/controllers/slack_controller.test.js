@@ -10,6 +10,12 @@ describe('SlackController', () => {
         expect(response.statusCode).toBe(200)
       });
     });
+
+    it('will create a gratitude message', () => {
+      return request(app).post('/slack/receive-user-message', {}).then((response) => {
+        // TODO
+      });
+    })
   });
 
 })

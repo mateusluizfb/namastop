@@ -32,7 +32,7 @@ describe('GratitudeMessage', () => {
       "text":"um agradecimento para <@UF42TNARE|mateus>",
       "response_url": "https://hooks.slack.com/commands/TF46JD2F3/514963790019/EQx7ljYBrZfl0YJTKZQHwMrO",
       "trigger_id":"514900435844.514222444513.c448466940d5620dcb45c5b11fc2d3d9"
-    }
+    };
 
     beforeAll(() => {
       let joaoData = {
@@ -42,7 +42,7 @@ describe('GratitudeMessage', () => {
             image_512: 'www.photos.com/João.png'
           }
         }
-      }
+      };
 
       let mateusData = {
         user: {
@@ -51,11 +51,11 @@ describe('GratitudeMessage', () => {
             image_512: 'www.photos.com/Mateus.png'
           }
         }
-      }
+      };
 
 
       let getUserFn = jest.fn();
-      getUserFn.mockReturnValueOnce(joaoData).mockReturnValueOnce(mateusData)
+      getUserFn.mockReturnValueOnce(joaoData).mockReturnValueOnce(mateusData);
       Slack.getUser = getUserFn;
     })
 
@@ -70,8 +70,121 @@ describe('GratitudeMessage', () => {
             receiver: 'Mateus',
             receiverPhoto: 'www.photos.com/Mateus.png',
             message: 'um agradecimento para Mateus'
-          })
-        })
+          });
+        });
+    });
+  });
+
+  describe('notifyGratefulUsers', () => {
+    const usersResponse = {
+      ok: true,
+      members: [
+        {
+          id: 'USLACKBOT',
+          team_id: 'TF46JD2F3',
+          name: 'slackbot',
+          deleted: false,
+          color: '757575',
+          real_name: 'slackbot',
+          tz: null,
+          tz_label: 'Pacific Standard Time',
+          tz_offset: -28800,
+          profile: [Object],
+          is_admin: false,
+          is_owner: false,
+          is_primary_owner: false,
+          is_restricted: false,
+          is_ultra_restricted: false,
+          is_bot: false,
+          is_app_user: false,
+          updated: 0
+        },
+        {
+          id: 'UF42TNARE',
+          team_id: 'TF46JD2F3',
+          name: 'mateus',
+          deleted: false,
+          color: 'e7392d',
+          real_name: 'mateus bxblue',
+          tz: 'America/Sao_Paulo',
+          tz_label: 'Brasilia Summer Time',
+          tz_offset: -7200,
+          profile: [Object],
+          is_admin: false,
+          is_owner: false,
+          is_primary_owner: false,
+          is_restricted: false,
+          is_ultra_restricted: false,
+          is_bot: false,
+          is_app_user: false,
+          updated: 1546462605,
+          has_2fa: false
+        },
+        {
+          id: 'UF46JD2L9',
+          team_id: 'TF46JD2F3',
+          name: 'mateuslfreitasb',
+          deleted: false,
+          color: '9f69e7',
+          real_name: 'mateuslfreitasb',
+          tz: 'America/Sao_Paulo',
+          tz_label: 'Brasilia Summer Time',
+          tz_offset: -7200,
+          profile: [Object],
+          is_admin: true,
+          is_owner: true,
+          is_primary_owner: true,
+          is_restricted: false,
+          is_ultra_restricted: false,
+          is_bot: false,
+          is_app_user: false,
+          updated: 1546462573,
+          has_2fa: false
+        },
+        {
+          id: 'UF4MDA9AP',
+          team_id: 'TF46JD2F3',
+          name: 'mateuslfb',
+          deleted: false,
+          color: '4bbe2e',
+          real_name: 'mateus microsoft',
+          tz: 'America/Sao_Paulo',
+          tz_label: 'Brasilia Summer Time',
+          tz_offset: -7200,
+          profile: [Object],
+          is_admin: false,
+          is_owner: false,
+          is_primary_owner: false,
+          is_restricted: false,
+          is_ultra_restricted: false,
+          is_bot: false,
+          is_app_user: false,
+          updated: 1546432498,
+          has_2fa: false
+        }
+      ],
+      cache_ts: 1546517882,
+      response_metadata: { next_cursor: '' }
+    };
+    const mockedListUsers = jest.fn();
+    const mockedSendMessage = jest.fn();
+
+    beforeAll(() => {
+      Slack.listUsers = mockedListUsers;
+      Slack.listUsers.mockReturnValueOnce(usersResponse);
+      Slack.sendMessage = mockedSendMessage;
+      GratitudeMessage.notifyGratefulUsers();
+    });
+
+    it('will consult the users in the slack API', () => expect(mockedListUsers).toHaveBeenCalled());
+
+    describe('will send a reminder about the gratitude message', () => {
+      const gratitudeReminder = 'Olá, você já agradeçeu alguém essa semana? Digite `/namastop`, o agradecimento e a @pessoa que eu cuido do resto :smile:'
+
+      it('', () => expect(mockedSendMessage).toHaveBeenNthCalledWith(1, 'USLACKBOT', gratitudeReminder));
+      it('', () => expect(mockedSendMessage).toHaveBeenNthCalledWith(2, 'UF42TNARE', gratitudeReminder));
+      it('', () => expect(mockedSendMessage).toHaveBeenNthCalledWith(3, 'UF46JD2L9', gratitudeReminder));
+      it('', () => expect(mockedSendMessage).toHaveBeenNthCalledWith(4, 'UF4MDA9AP', gratitudeReminder));
     });
   })
 });

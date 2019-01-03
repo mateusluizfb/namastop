@@ -26,7 +26,14 @@ GratitudeMessageSchema.statics.buildGratitudeMessage = async (data) => {
     receiverPhoto: receiver['user']['profile']['image_512'],
     message: data['text'].replace(/(<@).*?(>)/, receiver['user']['real_name'])
   }
+}
 
+GratitudeMessageSchema.statics.notifyGratefulUsers = () => {
+  console.log('Sending gratitude reminder to all the slack users');
+  Slack.listUsers().then((users) => {
+    const gratitudeReminder = ' Digite `/namastop`, o agradecimento e a @pessoa que eu cuido do resto :smile:'
+    users['members'].map((user) => Slack.sendMessage(user['id'], gratitudeReminder));
+  });
 }
 
 module.exports = mongoose.model('GratitudeMessage', GratitudeMessageSchema)

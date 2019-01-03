@@ -175,7 +175,7 @@ describe('GratitudeMessage', () => {
         Slack.sendMessage = mockedSendMessage;
       });
 
-      const gratitudeReminder = 'Olá, você já agradeçeu alguém essa semana? Digite `/namastop`, o agradecimento e a @pessoa que eu cuido do resto :smile:'
+      const gratitudeReminder = 'Olá, você já agradeçeu alguém essa semana? Digite `/namastop`, o agradecimento e a @pessoa *tudo em 140 caracteres* que eu cuido do resto :smile:'
 
       it('', async () => {
         await GratitudeMessage.notifyGratefulUsers();

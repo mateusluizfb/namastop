@@ -31,7 +31,7 @@ GratitudeMessageSchema.statics.buildGratitudeMessage = async (data) => {
 GratitudeMessageSchema.statics.notifyGratefulUsers = async () => {
   console.log('Sending gratitude reminder to all the slack users');
   const users = await Slack.listUsers();
-  const gratitudeReminder = 'Olá, você já agradeçeu alguém essa semana? Digite `/namastop`, o agradecimento e a @pessoa que eu cuido do resto :smile:';
+  const gratitudeReminder = 'Olá, você já agradeçeu alguém essa semana? Digite `/namastop`, o agradecimento e a @pessoa *tudo em 140 caracteres* que eu cuido do resto :smile:';
   users['members'].map((user) => Slack.sendMessage(user['id'], gratitudeReminder));
 }
 

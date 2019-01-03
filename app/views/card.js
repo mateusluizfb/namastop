@@ -7,11 +7,11 @@ class Card extends React.Component {
     this.textStyle = {
       'width': '150px',
       'height': '179px',
-      'overflow-wrap': 'break-word'
+      'overflowWrap': 'break-word'
     }
 
     this.imageStyle = {
-      'border-radius': '50%',
+      'borderRadius': '50%',
       'top': '15px',
       'left': '12px'
     }

@@ -8,18 +8,29 @@ class Home extends React.Component {
 
     this.state = { activePage: 1 };
 
-    this.arrowRightStyle = {
+    this.state.arrowRightStyle = {
       'position': 'absolute',
       'top': '50%',
-      'right': '10%'
+      'right': '10%',
+      'color': 'inherit'
     }
 
-    this.arrowLeftStyle = {
+    this.state.arrowLeftStyle = {
       'position': 'absolute',
       'top': '50%',
       'left': '10%',
       'color': '#d0d3d8'
     }
+  }
+
+  backOnePage() {
+    let activePage =- this.state.activePage;
+    this.setState({ activePage });
+  }
+
+  fowardOnePage() {
+    let activePage =+ this.state.activePage;
+    this.setState({ activePage });
   }
 
   render() {
@@ -34,7 +45,7 @@ class Home extends React.Component {
 
         <div className="row">
           <div className="col m1">
-            <i style={this.arrowLeftStyle} class="fas fa-arrow-left fa-5x"/>
+            <a style={this.state.arrowLeftStyle} onClick={this.backOnePage()} className="fas fa-arrow-left fa-5x" />
           </div>
           <div className="col m10">
             <div className="container" style={{'marginTop': '1.0em'}}>
@@ -42,7 +53,7 @@ class Home extends React.Component {
             </div>
           </div>
           <div className="col m1">
-            <i style={this.arrowRightStyle} class="fas fa-arrow-right fa-5x"/>
+            <a href='#' style={this.state.arrowRightStyle} onClick={this.fowardOnePage()} className="fas fa-arrow-right fa-5x" />
           </div>
         </div>
 

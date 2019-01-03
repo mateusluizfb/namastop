@@ -166,25 +166,33 @@ describe('GratitudeMessage', () => {
       cache_ts: 1546517882,
       response_metadata: { next_cursor: '' }
     };
-    const mockedListUsers = jest.fn();
     const mockedSendMessage = jest.fn();
 
-    beforeAll(() => {
-      Slack.listUsers = mockedListUsers;
-      Slack.listUsers.mockReturnValueOnce(usersResponse);
-      Slack.sendMessage = mockedSendMessage;
-      GratitudeMessage.notifyGratefulUsers();
-    });
-
-    it('will consult the users in the slack API', () => expect(mockedListUsers).toHaveBeenCalled());
 
     describe('will send a reminder about the gratitude message', () => {
+      beforeAll(() => {
+        Slack.listUsers = () => (usersResponse);
+        Slack.sendMessage = mockedSendMessage;
+      });
+
       const gratitudeReminder = 'Olá, você já agradeçeu alguém essa semana? Digite `/namastop`, o agradecimento e a @pessoa que eu cuido do resto :smile:'
 
-      it('', () => expect(mockedSendMessage).toHaveBeenNthCalledWith(1, 'USLACKBOT', gratitudeReminder));
-      it('', () => expect(mockedSendMessage).toHaveBeenNthCalledWith(2, 'UF42TNARE', gratitudeReminder));
-      it('', () => expect(mockedSendMessage).toHaveBeenNthCalledWith(3, 'UF46JD2L9', gratitudeReminder));
-      it('', () => expect(mockedSendMessage).toHaveBeenNthCalledWith(4, 'UF4MDA9AP', gratitudeReminder));
+      it('', async () => {
+        await GratitudeMessage.notifyGratefulUsers();
+        expect(mockedSendMessage).toHaveBeenNthCalledWith(1, 'USLACKBOT', gratitudeReminder);
+      });
+      it('', async () => {
+        await GratitudeMessage.notifyGratefulUsers();
+        expect(mockedSendMessage).toHaveBeenNthCalledWith(2, 'UF42TNARE', gratitudeReminder);
+      });
+      it('', async () => {
+        await GratitudeMessage.notifyGratefulUsers();
+        expect(mockedSendMessage).toHaveBeenNthCalledWith(3, 'UF46JD2L9', gratitudeReminder);
+      });
+      it('', async () => {
+        await GratitudeMessage.notifyGratefulUsers();
+        expect(mockedSendMessage).toHaveBeenNthCalledWith(4, 'UF4MDA9AP', gratitudeReminder);
+      });
     });
   })
 });

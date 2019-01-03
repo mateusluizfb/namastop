@@ -7,7 +7,8 @@ const GratitudeMessageSchema = new Schema({
   senderPhoto: String,
   receiver: String,
   receiverPhoto: String,
-  message: String
+  message: String,
+  created_at: Date
 });
 
 GratitudeMessageSchema.statics.buildGratitudeMessage = async (data) => {
@@ -24,7 +25,8 @@ GratitudeMessageSchema.statics.buildGratitudeMessage = async (data) => {
     senderPhoto: sender['user']['profile']['image_512'],
     receiver: receiver['user']['real_name'],
     receiverPhoto: receiver['user']['profile']['image_512'],
-    message: data['text'].replace(/(<@).*?(>)/, receiver['user']['real_name'])
+    message: data['text'].replace(/(<@).*?(>)/, receiver['user']['real_name']),
+    created_at: Date.now()
   }
 }
 

@@ -3,9 +3,9 @@ const router = express.Router();
 const GratitudeMessage = require('../models/gratitude_message');
 
 router.get('/', function(req, res, next) {
-  GratitudeMessage.find({}, (err, gratitudeMessages) => {
-    res.render('home', { gratitudeMessages: gratitudeMessages.reverse() }); // TODO: Add date to the model and sort using it
-  })
+  GratitudeMessage.find({}).sort({created_at: 'desc'}).exec((err, gratitudeMessages) => {
+    res.render('home', { gratitudeMessages: gratitudeMessages });
+  });
 });
 
 module.exports = router;

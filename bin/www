@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 require('dotenv').config()
+var app = require('../bin/db')();
 var app = require('../app');
 var debug = require('debug')('namastop:server');
 var http = require('http');

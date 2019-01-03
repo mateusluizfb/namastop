@@ -35,13 +35,15 @@ describe('GratitudeMessageController', () => {
     const createFn = jest.fn();
 
     beforeAll(() => {
-      GratitudeMessage.buildGratitudeMessage = () => ({
-        sender: 'João',
-        sender_photo: 'www.photos.com/João.png',
-        receiver: 'Mateus',
-        receiver_photo: 'www.photos.com/Mateus.png',
-        message: 'um agradecimento para Mateus'
-      });
+      GratitudeMessage.buildGratitudeMessage = () => {
+        return Promise.resolve({
+          sender: 'João',
+          senderPhoto: 'www.photos.com/João.png',
+          receiver: 'Mateus',
+          receiverPhoto: 'www.photos.com/Mateus.png',
+          message: 'um agradecimento para Mateus'
+        });
+      }
 
       GratitudeMessage.create = createFn
     });
@@ -56,7 +58,8 @@ describe('GratitudeMessageController', () => {
 
     it('will create a gratitude message', () => {
       return request(app)
-        .post('/gratitude-message/receive-slack-message', requestFormData)
+        .post('/gratitude-message/receive-slack-message')
+        .send(requestFormData)
         .then((response) => expect(createFn).toHaveBeenCalled());
     });
   });

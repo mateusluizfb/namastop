@@ -21,9 +21,9 @@ GratitudeMessageSchema.statics.buildGratitudeMessage = async (data) => {
 
   return {
     sender: sender['user']['real_name'],
-    sender_photo: sender['user']['profile']['image_72'],
+    senderPhoto: sender['user']['profile']['image_512'],
     receiver: receiver['user']['real_name'],
-    receiver_photo: receiver['user']['profile']['image_72'],
+    receiverPhoto: receiver['user']['profile']['image_512'],
     message: data['text'].replace(/(<@).*?(>)/, receiver['user']['real_name'])
   }
 

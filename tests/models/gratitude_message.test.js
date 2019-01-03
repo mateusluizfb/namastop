@@ -179,7 +179,7 @@ describe('GratitudeMessage', () => {
     it('will consult the users in the slack API', () => expect(mockedListUsers).toHaveBeenCalled());
 
     describe('will send a reminder about the gratitude message', () => {
-      const gratitudeReminder = 'Olá, você já agradeçeu alguém essa semana? :smile:'
+      const gratitudeReminder = 'Olá, você já agradeçeu alguém essa semana? Digite `/namastop`, o agradecimento e a @pessoa que eu cuido do resto :smile:'
 
       it('', () => expect(mockedSendMessage).toHaveBeenNthCalledWith(1, 'USLACKBOT', gratitudeReminder));
       it('', () => expect(mockedSendMessage).toHaveBeenNthCalledWith(2, 'UF42TNARE', gratitudeReminder));

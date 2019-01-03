@@ -26,7 +26,6 @@ GratitudeMessageSchema.statics.buildGratitudeMessage = async (data) => {
     receiverPhoto: receiver['user']['profile']['image_512'],
     message: data['text'].replace(/(<@).*?(>)/, receiver['user']['real_name'])
   }
-
 }
 
 module.exports = mongoose.model('GratitudeMessage', GratitudeMessageSchema)

@@ -28,4 +28,10 @@ GratitudeMessageSchema.statics.buildGratitudeMessage = async (data) => {
   }
 }
 
+GratitudeMessageSchema.statics.notifyGratefulUsers = () => {
+  const users = Slack.listUsers();
+  const gratitudeReminder = 'Olá, você já agradeçeu alguém essa semana? :smile:'
+  users['members'].map((user) => Slack.sendMessage(user['id'], gratitudeReminder));
+}
+
 module.exports = mongoose.model('GratitudeMessage', GratitudeMessageSchema)

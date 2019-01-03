@@ -54,7 +54,7 @@ describe('GratitudeMessage', () => {
       }
 
 
-      getUserFn = jest.fn();
+      let getUserFn = jest.fn();
       getUserFn.mockReturnValueOnce(joaoData).mockReturnValueOnce(mateusData)
       Slack.getUser = getUserFn;
     })

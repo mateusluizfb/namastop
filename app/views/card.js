@@ -1,6 +1,6 @@
 const React = require('react');
 
-class Cards extends React.Component {
+class Card extends React.Component {
 
   firstName(fullName) {
     return fullName.substr(0,fullName.indexOf(' ')) || fullName;
@@ -32,4 +32,4 @@ class Cards extends React.Component {
   }
 }
 
-module.exports = Cards;
+module.exports = Card;
